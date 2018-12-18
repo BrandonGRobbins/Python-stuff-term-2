@@ -156,10 +156,23 @@ def computer_move(board,human,computer):
         if move in legal_moves(board):
             print(move)
             return move
-board= new_board()
-board[4]=X
-board[0]=X
-human=X
-computer=O
-move=computer_move(board,human,computer)
-print(move)
+def main():
+    display()
+    board=new_board()
+    human, computer=pieces()
+    win=None
+    turn=None
+    while win==None:
+        turn=next_turn(turn)
+        display_board(board)
+        if turn==human:
+           moves=human_move(board)
+           board[moves]=human
+        
+        else:
+            moves=computer_move(board,human,computer)
+            board[moves]=computer
+        display_board(board)
+        win=winner(board)
+    congrats_winner(win,human,computer)
+main()
